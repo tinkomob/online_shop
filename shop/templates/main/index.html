@@ -5,7 +5,7 @@
 {% for prop in products %}
     <div class="product_card">
         <a href="{% url 'shop:product' prop.subCategory.category.slug prop.subCategory.slug prop.slug %}" class="block_link"></a>
-        <img src="{{MEDIA_URL}}/{{prop.image0}}" alt="Товар"><br>
+        <img src="{{prop.image0}}" alt="Товар"><br>
         <div class="product_display_info">
         <a href="{% url 'shop:product' prop.subCategory.category.slug prop.subCategory.slug prop.slug %}" class="product_title">{{ prop.title }}</a>
         <p class="product_price">{{ prop.price }}&#8381;</p>

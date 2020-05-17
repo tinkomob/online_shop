@@ -3,16 +3,7 @@
 {% block title %} {{category.title}} {% endblock %}
 {% block content %}
 <div class="row">
-<div class="col-sm-3">
-<aside class="sub_categories">
-    <ul>
-    {% for subCat in sub_categories %}
-        <li><a href="{% url 'shop:subCategory' subCat.category.slug subCat.slug %}">{{ subCat.title }}</a></li>
-    {% endfor %}
-    </ul>
-</aside>
-</div>
-<div class="col-sm-9">
+<div class="col-sm-12">
 <div class="product_board_aside">
 {% for prop in page_obj %}
     <div class="product_card">

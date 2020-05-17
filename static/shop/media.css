@@ -6,7 +6,33 @@
 
 /* Medium Devices, Desktops */
 @media only screen and (max-width : 992px) {
-
+   .head  form{
+        margin-left: 50px;
+   }
+    ul.thumb{
+        display: flex;
+        width: 100%;
+        padding: 0;
+        margin-top: 5px;
+        justify-content: space-between;
+    }
+    ul.thumb li{
+        display: inline-block;
+    }
+    .imgBox{
+        width: 100%;
+        max-width: 100%;
+        border: none;
+        order: 1;
+        margin-left: 0;
+    }
+    .sub_categories{
+        display: none;
+    }
+    .product .add_to_cart_button{
+        position: relative;
+        margin-top: 25vh;
+    }
 }
 
 /* Small Devices, Tablets */
@@ -48,6 +74,9 @@
 @media only screen and (max-width : 480px) {
     *{
         font-size: 20px;
+    }
+    .head  form{
+        margin-left: 0;
     }
     .logo_head{
         text-align: center;
@@ -119,8 +148,6 @@
     }
     ul.thumb li{
         display: inline-block;
-    }
-    ul.thumb img{
     }
     .imgBox{
         width: 100%;
