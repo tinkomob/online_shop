@@ -1,0 +1,43 @@
+body,html{
+    height:100%;
+}
+ul{
+    padding: 0;
+}
+ul li{
+    list-style-type: none;
+    color: red;
+}
+.signUp_boot, .login_boot, .logout_boot{
+    text-align: center;
+}
+.signup{
+    text-align: center;
+}
+input{
+    height: 50px;
+    width: 100%;
+    padding: 5px;
+    font-size: 26px !important;
+    border: none;
+    border-bottom: 1px solid rgb(126, 126, 126);
+}
+label{
+    display: none !important;
+}
+label[for="id_remember"]{
+    display: inline-block !important;
+}
+button[type=submit]{
+    text-transform: uppercase;
+    background-color: rgb(212, 63, 63);
+    color: #fff !important;
+    padding: 10px 30px;
+    text-align: center;
+    margin-bottom: 15px;
+    border: none;
+}
+button[type=submit]:active{
+    background-color: rgb(165, 47, 47);
+    color: #ffffff !important;
+}

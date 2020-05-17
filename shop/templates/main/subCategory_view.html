@@ -1,0 +1,36 @@
+{% extends "basic.html" %}
+{% block title %} {{subCategory.title}} {% endblock %}
+{% block content %}
+{{message.info}}
+<div class="col-sm-12">
+<div class="product_board">
+{% for prop in page_obj %}
+    <div class="product_card">
+        <img src="{{MEDIA_URL}}/{{prop.image0}}" alt="Товар"><br>
+        <a href="{% url 'shop:product' prop.subCategory.category.slug prop.subCategory.slug prop.slug %}" class="product_title">{{ prop.title }}</a>
+        <p class="product_price">{{ prop.price }}р</p>
+        <a href="{% url 'shopping_cart:add_to_cart' prop.id %}" class="add_to_cart_button list_button">В корзину</a>
+    </div>
+{% endfor %}
+</div>
+
+<br>    <br>
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">1</a>
+            <a href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-arrow-circle-left"></i></a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"><i class="fas fa-arrow-circle-right"></i></a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+{% endblock %}

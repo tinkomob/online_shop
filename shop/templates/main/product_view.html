@@ -1,0 +1,38 @@
+{% extends "basic.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-7 product_images">
+        <div class="imgBox"><img src="{{MEDIA_URL}}/{{product.image0}}" alt=""></div>
+        <ul class="thumb">
+            <li><a href="{{MEDIA_URL}}/{{product.image0}}" target="imgBox"><img src="{{MEDIA_URL}}/{{product.image0}}" alt="thumb"></a></li>
+            <li><a href="{{MEDIA_URL}}/{{product.image1}}" target="imgBox"><img src="{{MEDIA_URL}}/{{product.image1}}" alt="thumb"></a></li>
+            <li><a href="{{MEDIA_URL}}/{{product.image2}}" target="imgBox"><img src="{{MEDIA_URL}}/{{product.image2}}" alt="thumb"></a></li>
+            <li><a href="{{MEDIA_URL}}/{{product.image3}}" target="imgBox"><img src="{{MEDIA_URL}}/{{product.image3}}" alt="thumb"></a></li>
+        </ul>
+    </div>
+    <div class="col-sm-5 product">
+        <h2>{{ product.title }}</h2>
+        <p>{{product.description}}</p>
+        {% if product.size %}<span class="product_info">Размер: </span><p> {{product.size}}</p>{% endif %}
+        {% if product.material %}<span class="product_info">Материал: </span><p> {{product.material}}</p>{% endif %}
+        {% if product.articul %}<span class="product_info">Артикул: </span><p>{{product.articul}}</p>{% endif %}
+        <p class="product_price">{{ product.price }}р</p>
+        <a href="{% url 'shopping_cart:add_to_cart' product.id %}" class="add_to_cart_button">В корзину</a>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+$(document).ready(function(){
+    $('.thumb a').mouseover(function(e){
+        e.preventDefault();
+        $('.imgBox img').attr("src", $(this).attr("href"));
+    });
+    $('.thumb a').click(function(e){
+        e.preventDefault();
+        $('.imgBox img').attr("src", $(this).attr("href"));
+    });
+});
+</script>
+{% endblock %}
