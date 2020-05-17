@@ -108,6 +108,7 @@
     }
     .product .product_price{
         margin-top: 8px;
+        font-size: 1.1em;
     }
     ul.thumb{
         display: flex;

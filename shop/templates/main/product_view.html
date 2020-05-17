@@ -12,12 +12,12 @@
         </ul>
     </div>
     <div class="col-sm-5 product">
-        <h2>{{ product.title }}</h2>
-        <p>{{product.description}}</p>
+        <h2 class="product_title">{{ product.title }}</h2>
+        <p class="product_price">{{ product.price }}&#8381;</p><br> <br> 
+        {% if product.description %}<span class="product_info"></span><p class="product_description"> {{product.description}}</p>{% endif %}
         {% if product.size %}<span class="product_info">Размер: </span><p> {{product.size}}</p>{% endif %}
         {% if product.material %}<span class="product_info">Материал: </span><p> {{product.material}}</p>{% endif %}
         {% if product.articul %}<span class="product_info">Артикул: </span><p>{{product.articul}}</p>{% endif %}
-        <p class="product_price">{{ product.price }}р</p>
         <a href="{% url 'shopping_cart:add_to_cart' product.id %}" class="add_to_cart_button">В корзину</a>
     </div>
 </div>
