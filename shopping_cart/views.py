@@ -42,6 +42,8 @@ def add_to_cart(request, **kwargs):
     # create order associated with the user
     user_order, status = Order.objects.get_or_create(owner=user_profile, is_ordered=False)
     user_order.items.add(order_item)
+    # order_products = [item.product for item in order_items]
+    user_profile.ebooks.add(product)
     if status:
         # generate a reference code
         user_order.ref_code = generate_order_id()
@@ -101,8 +103,8 @@ def update_transaction_records(request, token):
     # Add products to user profile
     user_profile = get_object_or_404(Profile, user=request.user)
     # get the products from the items
-    order_products = [item.product for item in order_items]
-    user_profile.ebooks.add(*order_products)
+    # user_profile.ebooks.add(*order_products)
+    user_profile.ebooks.clear()
     user_profile.save()
 
     

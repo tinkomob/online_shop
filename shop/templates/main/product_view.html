@@ -3,12 +3,12 @@
 {% block content %}
 <div class="row">
     <div class="col-sm-7 product_images">
-        <div class="imgBox"><img src="{{MEDIA_URL}}/{{product.image0}}" alt=""></div>
+        <div class="imgBox"><img src="/{{product.image0}}" alt=""></div>
         <ul class="thumb">
-            <li><a href="{{MEDIA_URL}}/{{product.image0}}" target="imgBox"><img src="{{MEDIA_URL}}/{{product.image0}}" alt="thumb"></a></li>
-            <li><a href="{{MEDIA_URL}}/{{product.image1}}" target="imgBox"><img src="{{MEDIA_URL}}/{{product.image1}}" alt="thumb"></a></li>
-            <li><a href="{{MEDIA_URL}}/{{product.image2}}" target="imgBox"><img src="{{MEDIA_URL}}/{{product.image2}}" alt="thumb"></a></li>
-            <li><a href="{{MEDIA_URL}}/{{product.image3}}" target="imgBox"><img src="{{MEDIA_URL}}/{{product.image3}}" alt="thumb"></a></li>
+            <li><a href="/{{product.image0}}" target="imgBox"><img src="/{{product.image0}}" alt="thumb"></a></li>
+            <li><a href="/{{product.image1}}" target="imgBox"><img src="/{{product.image1}}" alt="thumb"></a></li>
+            <li><a href="/{{product.image2}}" target="imgBox"><img src="/{{product.image2}}" alt="thumb"></a></li>
+            <li><a href="/{{product.image3}}" target="imgBox"><img src="/{{product.image3}}" alt="thumb"></a></li>
         </ul>
     </div>
     <div class="col-sm-5 product">
@@ -18,7 +18,11 @@
         {% if product.size %}<span class="product_info">Размер: </span><p> {{product.size}}</p>{% endif %}
         {% if product.material %}<span class="product_info">Материал: </span><p> {{product.material}}</p>{% endif %}
         {% if product.articul %}<span class="product_info">Артикул: </span><p>{{product.articul}}</p>{% endif %}
-        <a href="{% url 'shopping_cart:add_to_cart' product.id %}" class="add_to_cart_button">В корзину</a>
+        {% if product in user.profile.ebooks.all %}
+                <a href="{% url 'shopping_cart:order_summary' %}" class="add_to_cart_button cart_button">Уже в корзине</a>
+            {% else %}
+                <a href="{% url 'shopping_cart:add_to_cart' product.id %}" class="add_to_cart_button">В корзину</a>
+            {% endif %}
     </div>
 </div>
 {% endblock %}

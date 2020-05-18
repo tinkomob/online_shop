@@ -1,17 +1,18 @@
 {% extends "basic.html" %}
 
 {% block content %}
+
+{% if result_products %}
 <div class="col-sm-12 product_board">
-{% for prop in result_products %}
-    <div class="product_card">
-        <img src="{{MEDIA_URL}}/{{prop.image0}}" alt="Товар"><br>
-        <a href="{% url 'shop:product' prop.subCategory.category.slug prop.subCategory.slug prop.slug %}" class="product_title">{{ prop.title }}</a>
-        <p class="product_price">{{ prop.price }}р</p>
-        <a href="{% url 'shopping_cart:add_to_cart' prop.id %}" class="add_to_cart_button list_button">В корзину</a>
-    </div>
-    
+    {% for prop in result_products %}
+    {% include 'product_card.html' %}
 {% endfor %}
 </div>
+{% else %}
+   <h2 style="text-align:center;margin-top: 10vh;">Упс! Ничего не найдено!</h2> 
+{% endif %}
+    
+
 
 
 {% endblock %}

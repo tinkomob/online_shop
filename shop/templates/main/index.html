@@ -2,19 +2,9 @@
 
 {% block content %}
 <div class="col-sm-12 product_board">
-{% for prop in products %}
-    <div class="product_card">
-        <a href="{% url 'shop:product' prop.subCategory.category.slug prop.subCategory.slug prop.slug %}" class="block_link"></a>
-        <img src="{{prop.image0}}" alt="Товар"><br>
-        <div class="product_display_info">
-        <a href="{% url 'shop:product' prop.subCategory.category.slug prop.subCategory.slug prop.slug %}" class="product_title">{{ prop.title }}</a>
-        <p class="product_price">{{ prop.price }}&#8381;</p>
-        <p class="description">{{ prop.description }}</p>
-        </div>
-        <a href="{% url 'shopping_cart:add_to_cart' prop.id %}" class="add_to_cart_button list_button">В корзину</a>
-    </div>
-    
-{% endfor %}
+    {% for prop in products %}
+        {% include 'product_card.html' %}
+    {% endfor %}
 </div>
 
 

@@ -16,7 +16,7 @@
 {% if messages %}
     <ul class="messages" id="msg">
     {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
             {{ message }}
         </li>
     {% endfor %}
@@ -67,21 +67,19 @@
            
         </header>
         <div class="content">{% block content %}{% endblock %}</div>
-        <footer class="footer">
-            <div class="row">
-                <div class="col-sm-3 logo_footer">
-                    <a href="/" class="logo"><img src="{% static 'online_shop/img/logo.png'%}" alt="logo"></a> <br>
-                    © 2020 Всё права НЕ защищены
+            <div class="row footer">
+                <div class="col-sm-2 logo_footer">
+                <a href="/" class="logo"><img src="{% static 'online_shop/img/logo-footer.png'%}" alt="logo"></a> <br>
+                © 2020 - 2020
                 </div>
-                <div class="d-flex footer_help col-sm-7 align-self-center justify-content-around">
+                <div class="d-flex footer_help col-sm-8 align-self-center justify-content-around">
                         <a href="/help/about">О компании</a>
                         <a href="/help/delivery">Доставка и самовывоз</a>
                         <a href="/help/payment">Оплата</a>
                         <a href="/help/contacts">Контакты</a>
                 </div>
-                <div class="d-flex col-sm-2 dev_info align-self-center justify-content-center ">Разработка сайта - Шмидт Фёдор, группа 481</div>
+                <div class="d-flex col-sm-2 dev_info align-self-center justify-content-center ">Шмидт Фёдор 481</div>
             </div>
-        </footer>
     </div>
 
     <script src="{% static 'online_shop/js/jquery-3.5.0.slim.min.js' %}"></script>
