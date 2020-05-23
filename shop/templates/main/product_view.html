@@ -3,12 +3,22 @@
 {% block content %}
 <div class="row">
     <div class="col-sm-7 product_images">
-        <div class="imgBox"><img src="/{{product.image0}}" alt=""></div>
+        <div class="imgBox"><img src="{{MEDIA_URL}}{{product.image0}}" alt=""></div>
         <ul class="thumb">
-            <li><a href="/{{product.image0}}" target="imgBox"><img src="/{{product.image0}}" alt="thumb"></a></li>
-            <li><a href="/{{product.image1}}" target="imgBox"><img src="/{{product.image1}}" alt="thumb"></a></li>
-            <li><a href="/{{product.image2}}" target="imgBox"><img src="/{{product.image2}}" alt="thumb"></a></li>
-            <li><a href="/{{product.image3}}" target="imgBox"><img src="/{{product.image3}}" alt="thumb"></a></li>
+            {% if product.image0 %}
+                <li><a href="{{MEDIA_URL}}{{product.image0}}" target="imgBox"><img src="{{MEDIA_URL}}{{product.image0}}" alt="thumb"></a></li>
+            {% endif %}</li>
+            
+            {% if product.image1 %}
+                <li><a href="{{MEDIA_URL}}{{product.image1}}" target="imgBox"><img src="{{MEDIA_URL}}{{product.image1}}" alt="thumb"></a></li>
+            {% endif %}
+            {% if product.image2 %}
+                <li><a href="{{MEDIA_URL}}{{product.image2}}" target="imgBox"><img src="{{MEDIA_URL}}{{product.image2}}" alt="thumb"></a></li>
+            {% endif %}
+            {% if product.image3 %}
+                <li><a href="{{MEDIA_URL}}{{product.image3}}" target="imgBox"><img src="{{MEDIA_URL}}{{product.image3}}" alt="thumb"></a></li>
+            {% endif %}
+           
         </ul>
     </div>
     <div class="col-sm-5 product">

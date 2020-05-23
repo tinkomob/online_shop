@@ -41,13 +41,13 @@ class Product(models.Model):
     price = models.IntegerField()
     quantity = models.IntegerField(null=True)
     image0 = models.ImageField(
-        blank=True, upload_to='media/images/', verbose_name='Главное изображение')
+        blank=True, upload_to='images/', verbose_name='Главное изображение')
     image1 = models.ImageField(
-        blank=True, upload_to='media/images/', verbose_name='Доп Изображение 1')
+        blank=True, upload_to='images/', verbose_name='Доп Изображение 1')
     image2 = models.ImageField(
-        blank=True, upload_to='media/images/', verbose_name='Доп Изображение 2')
+        blank=True, upload_to='images/', verbose_name='Доп Изображение 2')
     image3 = models.ImageField(
-        blank=True, upload_to='media/images/', verbose_name='Доп Изображение 3')
+        blank=True, upload_to='images/', verbose_name='Доп Изображение 3')
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)

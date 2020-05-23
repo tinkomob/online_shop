@@ -25,7 +25,7 @@ SECRET_KEY = '28tsf$3ugk#4y-jvr*22(_@w@r^34sg203=al7rg)=skf3+dnb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['']
+ALLOWED_HOSTS = ['192.168.1.32']
 
 
 # Application definition
@@ -51,10 +51,10 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'online_shop.urls'
@@ -137,8 +137,8 @@ STATICFILES_DIRS = [
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Django AllAuth Settings
 
@@ -150,3 +150,4 @@ AUTHENTICATION_BACKENDS = (
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
+# X_FRAME_OPTIONS = 'SAMEORIGIN'
