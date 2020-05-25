@@ -33,6 +33,9 @@ class Order(models.Model):
 
     def __str__(self):
         return '{0} - {1}'.format(self.owner, self.ref_code)
+    class Meta:
+        verbose_name = 'Заказы'
+        verbose_name_plural = 'Заказы'
         
 class Transaction(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
@@ -47,3 +50,7 @@ class Transaction(models.Model):
 
     class Meta:
         ordering = ['-timestamp']
+
+    class Meta:
+        verbose_name = 'Транзакции'
+        verbose_name_plural = 'Транзакции'
