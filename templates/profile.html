@@ -1,39 +1,111 @@
 {% extends 'basic.html' %}
 
 {% block content %}
-<h2 style="text-align:center;">Профиль</h2>
-<table class="table table-hover table-bordered text-center">
-      <tr class="text-center">
-        <th>Дата заказа</th>
-        <th>Код</th>
-        <th>Товары</th>
-        <th>Цена</th>
-      </tr>
-      {% for order in my_orders %}
-        <tr>
-          <td>{{ order.date_ordered|date:'d-m-Y H:i' }}</td>
-          <td>{{ order.ref_code }}</td>
-          <td>
-        	{% for item in order.items.all %}
-        		{{ item.product.title }} <br>
-      		{% endfor %}
-      	  </td>
-          <td>{{ order.get_cart_total }} р</td>
+<div class="col-sm-12">
+  <h2 style="text-align:center;">Профиль</h2>
+  <button class="tablinks" onclick="openTabProfile('trans')">Транзакции</button>
+  <button class="tablinks" onclick="openTabProfile('my_revs')">Мои отзывы</button>
+  <button class="tablinks" onclick="openTabProfile('settings')">Настройки</button>
+  <div id="trans">
+  <h3>Транзакции</h3>
+  
+  <table class="table table-hover table-bordered text-center">
+    
+    <tr class="text-center">
+      <th>Дата заказа</th>
+      <th>Код</th>
+      <th>Товары</th>
+      <th>Цена</th>
+    </tr>
+    {% for order in my_orders %}
+    <tr>
+      <td>{{ order.date_ordered|date:'d-m-Y H:i' }}</td>
+      <td>{{ order.ref_code }}</td>
+      <td>
+        {% for item in order.items.all %}
+        {{ item.product.title }} <br>
+        {% endfor %}
+      </td>
+      <td>{{ order.get_cart_total }} р</td>
 
-        </tr>
-      {% empty %}
-        <tr>
-          <td colspan= 4> У вас нет заказов.</td>
-        </tr>
-      {% endfor %}
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan=4> У вас нет заказов.</td>
+    </tr>
+    {% endfor %}
 
-      <tr>
-        <td colspan=4>
-          <a href="{% url 'shop:home' %}" class="btn btn-warning pull-left">
-            {% if not order %}Продолжить закупку{% else %}Add Items to Cart {% endif %}
-          </a> 
-        </td>
-      </tr>
-    </table>
-
+    <tr>
+      <td colspan=4>
+        <a href="{% url 'shop:home' %}" class="btn btn-warning pull-left">
+          {% if not order %}Продолжить закупку{% else %}Add Items to Cart {% endif %}
+        </a>
+      </td>
+    </tr>
+  </table>
+  </div>
+  <div class="my_reviews" id="my_reviews">
+  <h3>Мои отзывы</h3>
+    <div class="all_revs" style="height:500px;">
+            {% for obj in my_reviews %}
+                <div class="rev">
+                    <p><b class="author">{{obj.product.title}}</b> 
+                      
+                    </p> 
+                    
+                    <br><p class="text">{{obj.text}}</p>
+                    <a href="/upd_rev/{{obj.product.id}}/{{obj.id}}">Изменить</a>
+                    <a href="/del_rev/{{obj.product.id}}/{{obj.id}}">Удалить</a>
+                    {% if obj.rate <= 1 %}
+                        <p class="rate rating_low">{{obj.rate|floatformat:2}}</p>
+                    {% elif obj.rate > 1 and obj.rate < 4.5%}
+                        <p class="rate rating_mid">{{obj.rate|floatformat:2}}</p>
+                    {% else %}
+                        <p class="rate rating_high">{{obj.rate|floatformat:2}}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            </div>
+  </div>
+  <div class="profile_settings" id="profile_settings">
+  <h3>Настройки</h3>
+  <form method="post" action="">
+    {% csrf_token %}
+    
+       Ваш номер телефона <input type="tel" name='tel' placeholder='8 913 123 45 67' value="{{my_user_profile.phone_number}}"> <br>
+       
+       Ваш адрес доставки <input type="text" name='address' placeholder='г.Томск, ул. Герцена, 18, <индекс>' value="{{my_user_profile.delivery_address}}"> <br>
+       <p style="color: #585858;
+    font-size: 0.8em;">Пример: г.Томск, ул. Герцена, 18, <индекс> </p>
+       <br>
+       <button type="submit" class="btn btn-success">Сохранить</button>
+    </form>
+  </div>
+</div>
 {% endblock content %}
+{% block script %}
+<script>
+function openTabProfile(tab){
+        if (tab === 'my_revs'){
+            document.getElementById("my_reviews").style.display = "block";
+            document.getElementById("trans").style.display = "none";
+            
+            document.getElementById("profile_settings").style.display = "none";
+
+        }
+        if (tab === 'trans'){
+            document.getElementById("trans").style.display = "block";
+            document.getElementById("my_reviews").style.display = "none";
+            document.getElementById("profile_settings").style.display = "none";
+        }
+        
+        if (tab === 'settings'){
+            document.getElementById("profile_settings").style.display = "block";
+            document.getElementById("trans").style.display = "none";
+            document.getElementById("my_reviews").style.display = "none";
+            
+
+        }
+    }
+</script>
+{% endblock script %}

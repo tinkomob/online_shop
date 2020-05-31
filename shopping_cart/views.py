@@ -38,7 +38,7 @@ def add_to_cart(request, **kwargs):
     #     messages.info(request, 'You already own this ebook')
     #     return redirect(reverse('shop:home')) 
     # create orderItem of the selected product
-    order_item, status = OrderItem.objects.get_or_create(product=product)
+    order_item, status = OrderItem.objects.get_or_create(product=product, user = user_profile)
     # create order associated with the user
     user_order, status = Order.objects.get_or_create(owner=user_profile, is_ordered=False)
     user_order.items.add(order_item)
@@ -50,16 +50,18 @@ def add_to_cart(request, **kwargs):
         user_order.save()
 
     # show confirmation message and redirect back to the same page
-    messages.info(request, "продукт добавлен в корзину")
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    messages.info(request, "товар  " + product.title + " добавлен в корзину")
+    return HttpResponseRedirect('/')
 
 
 @login_required()
 def delete_from_cart(request, item_id):
-    item_to_delete = OrderItem.objects.filter(pk=item_id)
-    if item_to_delete.exists():
-        item_to_delete[0].delete()
-        messages.info(request, "продукт был удалён")
+    user_profile = get_object_or_404(Profile, user=request.user)
+    item_to_delete = OrderItem.objects.get(pk=item_id)
+    product = Product.objects.get(id=item_to_delete.product.id)
+    user_profile.ebooks.remove(product)
+    item_to_delete.delete()
+    messages.info(request, "товар был удалён")
     return redirect(reverse('shopping_cart:order_summary'))
 
 
@@ -71,14 +73,30 @@ def order_details(request, **kwargs):
     }
     return render(request, 'shopping_cart/order_summary.html', context)
 
+@login_required()
+def inc_orderItem(request, item_id):
+    item = OrderItem.objects.get(id=item_id)
+    item.quantity += 1
+    item.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+@login_required()
+def decr_orderItem(request, item_id):
+    item = OrderItem.objects.get(id=item_id)
+    item.quantity -= 1
+    if item.quantity < 1:
+        item.quantity = 1
+    item.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 @login_required()
 def checkout(request, **kwargs):
     existing_order = get_user_pending_order(request) 
+    user_profile = get_object_or_404(Profile, user=request.user)
     client_token = generate_client_token()
     context = {
         'order': existing_order,
         'client_token': client_token,
+        'user_profile': user_profile,
     }
 
     return render(request, 'shopping_cart/checkout.html', context)

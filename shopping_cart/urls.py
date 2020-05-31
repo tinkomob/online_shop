@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.urls import path,include
 
 from .views import (
     add_to_cart,
@@ -6,7 +7,9 @@ from .views import (
     order_details,
     checkout,
     update_transaction_records,
-    success
+    success,
+    inc_orderItem,
+    decr_orderItem,
 )
 
 app_name = 'shopping_cart'
@@ -18,5 +21,7 @@ urlpatterns = [
     url(r'^item/delete/(?P<item_id>[-\w]+)/$', delete_from_cart, name='delete_item'),
     url(r'^checkout/$', checkout, name='checkout'),
     url(r'^update-transaction/(?P<token>[-\w]+)/$', update_transaction_records,
-        name='update_records')
+        name='update_records'),
+    path("inc_orderItem/<int:item_id>", inc_orderItem, name="inc_orderItem"),
+    path("decr_orderItem/<int:item_id>", decr_orderItem, name="decr_orderItem"),
 ]

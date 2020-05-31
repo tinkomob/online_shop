@@ -2,33 +2,16 @@
 
 {% block title %} {{category.title}} {% endblock %}
 {% block content %}
+{% include 'sort_block.html' %}
 <h3 style="text-align:center;">{{category.title}}</h3>
 <div class="row">
     <div class="col-sm-12">
         <div class="product_board_aside">
-            {% for prop in page_obj %}
+            {% for prop in products %}
             {% include 'product_card.html' %}
             {% endfor %}
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-sm-12 pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-            <a href="?page=1">1</a>
-            <a href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-arrow-circle-left"></i></a>
-            {% endif %}
 
-            <span class="current">
-                Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
-            </span>
-
-            {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}"><i class="fas fa-arrow-circle-right"></i></a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
-            {% endif %}
-        </span>
-    </div>
-</div>
     {% endblock %}

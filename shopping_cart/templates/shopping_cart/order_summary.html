@@ -10,6 +10,8 @@
         <th>Номер</th>
         <th>Товар</th>
         <th>Цена</th>
+        <th>Количество</th>
+        <th>Итого</th>
       </tr>
       {% for item in order.get_cart_items %}
         <tr>
@@ -22,7 +24,14 @@
               </a>
             </span>
           </td>
-          <td>{{ item.product.price }}&#8381;</td>
+          <td>{{item.product.price}}</td>
+          <td>
+          {{item.quantity}} <a href="{% url 'shopping_cart:inc_orderItem' item.id %}"><i
+                                    class="fas fa-plus ml-2"></i></a> 
+                                    <a href="{% url 'shopping_cart:decr_orderItem' item.id %}"><i
+                                    class="fas fa-minus ml-2"></i></a>
+                                    </td>
+          <td>{{ item.get_total_item_price }}&#8381;</td>
         </tr>
       {% empty %}
         <tr>
@@ -31,8 +40,15 @@
       {% endfor %}
       <tr>
         {% if order.get_cart_total != None %}
-        <td colspan=2>
-          <strong class="pull-right">Итого:</strong>
+        <td colspan=1 >
+          <a href="{% url 'shop:home' %}" class="btn btn-warning pull-left">
+            {% if order %}Продолжить закупку{% else %} Добавить товары {% endif %}
+          </a> 
+        </td>
+        <td colspan=3>
+          {% if order.get_cart_items %}
+            <a href="{% url 'shopping_cart:checkout' %}" class="pull-right btn btn-primary">Купить</a>
+          {% endif %}
         </td>
         
         <td colspan= 1>
@@ -41,16 +57,8 @@
         {% endif %}
       </tr>
       <tr>
-        <td colspan=1 >
-          <a href="{% url 'shop:home' %}" class="btn btn-warning pull-left">
-            {% if order %}Продолжить закупку{% else %} Добавить товары {% endif %}
-          </a> 
-        </td>
-        <td colspan=2>
-          {% if order.get_cart_items %}
-            <a href="{% url 'shopping_cart:checkout' %}" class="pull-right btn btn-primary">Купить</a>
-          {% endif %}
-        </td>
+        
+        
       </tr>
     </table>
    </div>

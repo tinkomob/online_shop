@@ -1,6 +1,8 @@
 from django.db import models
 from pytils.translit import slugify
-
+from datetime import datetime
+import statistics
+# from accounts.models import Profile
 # Create your models here.
 
 
@@ -45,7 +47,8 @@ class Product(models.Model):
     size = models.CharField(max_length=45, null=True, blank=True)
     material = models.CharField(max_length=30, null=True, blank=True)
     price = models.IntegerField()
-    quantity = models.IntegerField(null=True)
+    date_added = models.DateTimeField(default=datetime.now)
+    rating = models.FloatField(default=0)
     image0 = models.ImageField(
         blank=True, upload_to='images/', verbose_name='Главное изображение')
     image1 = models.ImageField(
@@ -54,13 +57,31 @@ class Product(models.Model):
         blank=True, upload_to='images/', verbose_name='Доп Изображение 2')
     image3 = models.ImageField(
         blank=True, upload_to='images/', verbose_name='Доп Изображение 3')
+    def getRevsRating(self):
+        rates = self.review_set.filter(product_id=self.id)
+        avg_rating = []
+        for item in rates:
+            avg_rating.append(item.rate)
+        return statistics.mean(avg_rating)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
+        self.rating = self.getRevsRating()
         super(Product, self).save(*args, **kwargs)
-
+    
     def __str__(self):
         return self.title
     class Meta:
         verbose_name = 'Товары'
         verbose_name_plural = 'Товары'
+class Review(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    author = models.ForeignKey('accounts.Profile', on_delete=models.SET_NULL, null=True)
+    rate = models.FloatField(default=0)
+    text = models.TextField()
+
+    def __str__(self):
+        return self.author.user.username + str(self.product.id)
+    class Meta:
+        verbose_name = 'Отзывы'
+        verbose_name_plural = 'Отзывы'

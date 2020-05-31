@@ -282,6 +282,9 @@ ul.thumb img{
 .checkout form{
     margin-bottom: 10px;
 }
+.checkout p{
+    margin-top: 10px;
+}
 .checkout input{
     width: 33%;
     padding: 5px;
@@ -292,4 +295,131 @@ ul.thumb img{
 
 .buy_info{
     color: rgb(97, 97, 97);
+}
+.reviews{
+    display: none;
+}
+.reviews .form input{
+    margin: 10px 0;
+}
+.all_revs{
+    height: 200px;
+    overflow: scroll;
+    overflow-x: hidden;
+    border: 1px solid #c5c5c5;
+    margin-bottom: 20px;
+    
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+.all_revs .rev{
+    padding: 0 10px;
+}
+.my_reviews .all_revs{
+    padding: 10px;
+}
+.my_reviews .all_revs .rev{
+    padding: 10px;
+}
+.all_revs .rev:nth-child(2n){
+    background-color: rgb(221, 221, 221);
+}
+.all_revs .author{
+    float: left;
+}
+
+.all_revs .rate{
+    float: right;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.my_reviews, .profile_settings{
+    display: none;
+}
+.profile_settings form input{
+    margin: 10px;
+    
+}
+.profile_settings form input[type=text]{
+    width: 450px;
+    max-width: 100%;
+}
+.sort > div {
+    display: flex;
+    flex-direction: row;
+}
+.sort > div > div{
+    margin-left: 10px;
+}
+
+.sort > div > div i{
+    height: 10px; 
+}
+.sort .fa-sort-up{
+    vertical-align: middle;
+}
+.sort a{
+    padding: 5px;
+    transition: .3s ease;
+}
+.sort a:hover{
+    color: rgb(212, 63, 63);
+    
+    font-size: 1.05em;
+}
+.sort .active{
+    border: 1px solid rgb(212, 63, 63);
+}
+.rating{
+    display: inline;    
+    padding: 5px;
+    
+}
+.rating_low{
+    background-color: rgb(109, 109, 109);
+    color: #fff;
+}
+.rating_mid{
+    background-color: rgb(215, 236, 25);
+    color: #fff;
+}
+.rating_high{
+    background-color: rgb(49, 218, 63);
+    color: #fff;
+}
+.tablinks{
+    border: none;
+    padding: 5px;
+    border-bottom: 1px solid rgb(116, 116, 116);
+    transition: .2s ease;
+}
+.tablinks:hover{
+    border: none;
+    padding: 5px;
+    border-bottom: 3px solid rgb(116, 116, 116);
+}
+.my_reviews .rate{
+    float: left;
+    padding: 0 5px;
+}
+#trans table tr:nth-child(2n){
+    background-color: rgb(201, 201, 201);
 }

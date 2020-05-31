@@ -1,0 +1,33 @@
+<div class="row sort">
+    <div class="col-sm-12">
+    Соритровать по: 
+        <div class="price_sort">
+            {% if request.GET.ord == 'asc' %}
+            <a href="?sort=price&ord=desc" class="active" >По цене <i class="fas fa-sort-up"></i></a>
+            {% elif request.GET.ord == 'desc' %}
+            <a href="?sort=price&ord=asc" class="active">По цене <i class="fas fa-sort-down"></i></a>
+            {% else %}
+            <a href="?sort=price&ord=asc">По цене <i class="fas fa-sort-up"></i></a>
+            {% endif %}
+
+        </div>
+        <div class="date_sort">
+            {% if request.GET.ord == 'new' %}
+            <a href="?sort=date&ord=old" class="active">По новизне <i class="fas fa-sort-down"></i></a>
+            {% elif request.GET.ord == 'old' %}
+            <a href="?sort=date&ord=new" class="active">По новизне <i class="fas fa-sort-up"></i></a>
+            {% else %}
+            <a href="?sort=date&ord=old">По новизне <i class="fas fa-sort-up"></i></a>
+            {% endif %}
+        </div>
+        <div class="rating_sort">
+            {% if request.GET.ord == 'small' %}
+            <a href="?sort=rating&ord=big" class="active" >По рейтингу <i class="fas fa-sort-up"></i></a>
+            {% elif request.GET.ord == 'big' %}
+            <a href="?sort=rating&ord=small" class="active">По рейтингу <i class="fas fa-sort-down"></i></a>
+            {% else %}
+            <a href="?sort=rating&ord=small">По рейтингу <i class="fas fa-sort-up"></i></a>
+            {% endif %}
+        </div>
+    </div>
+</div>

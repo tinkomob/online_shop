@@ -1,4 +1,12 @@
  <div class="product_card">
+        {% if prop.rating <= 1 %}
+            <p class="rating_low">{{prop.rating}}</p>
+        {% elif prop.rating > 1 and prop.rating < 4.5%}
+            <p class="rating_mid">{{prop.rating}}</p>
+        {% else %}
+            <p class="rating_high">{{prop.rating}}</p>
+        {% endif %}
+        
         <a href="{% url 'shop:product' prop.subCategory.category.slug prop.subCategory.slug prop.slug %}" class="block_link"></a>
         <img src="{{MEDIA_URL}}{{prop.image0}}" alt="Товар"><br>
         <div class="product_display_info">

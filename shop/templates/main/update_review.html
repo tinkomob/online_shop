@@ -1,0 +1,18 @@
+{% extends "basic.html" %}
+
+{% block title %} Изменить отзыв{% endblock %}
+{% block content %}
+<div class="col-sm-12">
+   <div class="form">
+            <form action="" method="post">
+            {% csrf_token %}
+            Ваша оценка:<input type="number" step="0.01" name="rate" 
+            min="0" max="5" placeholder="0-5" value="{{review.rate}}"> <br>
+            <textarea name="text" cols="30" rows="3" placeholder="Пишите отзыв здесь!">{{review.text}}</textarea> <br>
+            <input type="submit" value="Обновить">
+            </form>
+            </div>
+</div>
+
+
+{% endblock %}

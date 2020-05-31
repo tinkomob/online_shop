@@ -6,15 +6,24 @@
     <h2>Обработка заказа</h2>
     <p>Сумма покупки: <b>{{order.get_cart_total}}</b> р</p>
     <p>Токен: {{client_token}}</p> <br>
-    <div class="buy_info"> После ввода данных с вами свяжется мендежер и уточнит детали заказа </div>
-    <form method="post" id='form-id' action="{% url 'shopping_cart:update_records' client_token %}">
-    {% csrf_token %}
-       Введите номер телефона <input type="tel" name='tel' placeholder='8 913 123 45 67' required> <br>
-       Введите адрес доставки <input type="text" name='adress' placeholder='г.Томск, ул. Герцена, 18' required> <br>
-       <br>
-       <button type="submit" class="btn btn-primary">Отправить</button>
-    <a href="{% url 'shopping_cart:order_summary' %}" class="btn btn-decline">Назад</a>
-    </form>
+    <div class="buy_info"> После ввода данных и оплаты с вами свяжется мендежер и уточнит детали заказа </div>
+    {% if user_profile.phone_number and user_profile.delivery_address %}
+        Ваш номер телефона: <b>{{user_profile.phone_number}}</b> <br> 
+        Ваш адрес: <b>{{user_profile.delivery_address}}</b> <br>
+        <a href="{% url 'shopping_cart:update_records' client_token %}" class="btn btn-primary">Оплатить</a>
+    {% else %}
+        <form method="post" id='form-id' action="{% url 'shopping_cart:update_records' client_token %}">
+        {% csrf_token %}
+        Введите номер телефона <input type="tel" name='tel' placeholder='8 913 123 45 67' required> <br>
+        Введите адрес доставки <input type="text" name='adress' placeholder='г.Томск, ул. Герцена, 18, <почтовый индекс>' required> <br>
+        <br>
+        <button type="submit" class="btn btn-primary">Оплатить</button>
+        <a href="{% url 'shopping_cart:order_summary' %}" class="btn btn-decline">Назад</a>
+        <p>Не хотите вводить каждый раз? Введите один раз в <a href="{% url 'accounts:my_profile' %}"><i class="fas fa-user-alt"></i> <span class="mark">своём профиле</span></a> в разделе "НАСТРОЙКИ". <br> Изменить можно в любой момент</p>
+        
+        </form>
+    {% endif %}
+    
 </div>
 </div>
 {% endblock %}
