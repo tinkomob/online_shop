@@ -9,7 +9,7 @@ chardet==3.0.4
 colorama==0.4.3
 defusedxml==0.6.0
 dj-stripe==2.3.0
-Django==2.2.10
+Django==2.2.27
 django-allauth==0.39.1
 django-bootstrap==0.2.4
 django-bootstrap4==1.0.1
